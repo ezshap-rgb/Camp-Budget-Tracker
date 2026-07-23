@@ -330,6 +330,13 @@
       "amount": 4,
       "note": "retail markets",
       "date": "2026-07-23T20:01:36.714Z"
+    },
+    {
+      "id": "1784836920457",
+      "type": "spend-on",
+      "amount": 18.9,
+      "note": "Five Below",
+      "date": "2026-07-23T20:02:00.458Z"
     }
   ]
 }
