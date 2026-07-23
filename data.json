@@ -1,5 +1,322 @@
-{
-  "budget": 0,
+  {
+  "budget": 476,
   "budgetNote": "",
-  "transactions": []
+  "transactions": [
+    {
+      "id": "1782864830325",
+      "type": "load",
+      "amount": 100,
+      "note": "",
+      "date": "2026-07-01T00:13:50.325Z"
+    },
+    {
+      "id": "1782867087043",
+      "type": "spend-off",
+      "amount": 2.99,
+      "note": "Ranch",
+      "date": "2026-07-01T00:51:27.044Z"
+    },
+    {
+      "id": "1782867119664",
+      "type": "spend-on",
+      "amount": 2.99,
+      "note": "Seven eleven",
+      "date": "2026-07-01T00:51:59.666Z"
+    },
+    {
+      "id": "1782867148285",
+      "type": "spend-on",
+      "amount": 29.99,
+      "note": "Dollar tree",
+      "date": "2026-07-01T00:52:28.285Z"
+    },
+    {
+      "id": "1782867185144",
+      "type": "spend-off",
+      "amount": 6.77,
+      "note": "Dollar tree",
+      "date": "2026-07-01T00:53:05.144Z"
+    },
+    {
+      "id": "1782867214570",
+      "type": "spend-off",
+      "amount": 7.49,
+      "note": "Cvs",
+      "date": "2026-07-01T00:53:34.570Z"
+    },
+    {
+      "id": "1782867231389",
+      "type": "load",
+      "amount": 15,
+      "note": "",
+      "date": "2026-07-01T00:53:51.389Z"
+    },
+    {
+      "id": "1782867271157",
+      "type": "spend-off",
+      "amount": 12.88,
+      "note": "American dream",
+      "date": "2026-07-01T00:54:31.157Z"
+    },
+    {
+      "id": "1782867295278",
+      "type": "spend-off",
+      "amount": 4.09,
+      "note": "American dream",
+      "date": "2026-07-01T00:54:55.278Z"
+    },
+    {
+      "id": "1782867342868",
+      "type": "spend-off",
+      "amount": 3.45,
+      "note": "Vending",
+      "date": "2026-07-01T00:55:42.868Z"
+    },
+    {
+      "id": "1782867363668",
+      "type": "load",
+      "amount": 100,
+      "note": "",
+      "date": "2026-07-01T00:56:03.668Z"
+    },
+    {
+      "id": "1782867378026",
+      "type": "load",
+      "amount": 50,
+      "note": "",
+      "date": "2026-07-01T00:56:18.026Z"
+    },
+    {
+      "id": "1782867416320",
+      "type": "spend-off",
+      "amount": 20.15,
+      "note": "American Dream",
+      "date": "2026-07-01T00:56:56.320Z"
+    },
+    {
+      "id": "1782867434774",
+      "type": "spend-off",
+      "amount": 5.1,
+      "note": "American Dream",
+      "date": "2026-07-01T00:57:14.774Z"
+    },
+    {
+      "id": "1782867471888",
+      "type": "spend-off",
+      "amount": 153.73,
+      "note": "American Dream park",
+      "date": "2026-07-01T00:57:51.888Z"
+    },
+    {
+      "id": "1782867527700",
+      "type": "spend-off",
+      "amount": 5.64,
+      "note": "Cinnabun",
+      "date": "2026-07-01T00:58:47.700Z"
+    },
+    {
+      "id": "1782867546945",
+      "type": "spend-off",
+      "amount": 3.45,
+      "note": "Machine",
+      "date": "2026-07-01T00:59:06.945Z"
+    },
+    {
+      "id": "1782867555044",
+      "type": "load",
+      "amount": 35,
+      "note": "",
+      "date": "2026-07-01T00:59:15.044Z"
+    },
+    {
+      "id": "1782867590194",
+      "type": "load",
+      "amount": 59,
+      "note": "",
+      "date": "2026-07-01T00:59:50.194Z"
+    },
+    {
+      "id": "1782963633375",
+      "type": "spend-on",
+      "amount": 10.41,
+      "note": "7/11",
+      "date": "2026-07-02T03:40:33.376Z"
+    },
+    {
+      "id": "1783002448138",
+      "type": "load",
+      "amount": 40,
+      "note": "",
+      "date": "2026-07-02T14:27:28.138Z"
+    },
+    {
+      "id": "1783008374432",
+      "type": "spend-off",
+      "amount": 19.5,
+      "note": "Target",
+      "date": "2026-07-02T16:06:14.432Z"
+    },
+    {
+      "id": "1783013354148",
+      "type": "spend-on",
+      "amount": 50.09,
+      "note": "Walmart",
+      "date": "2026-07-02T17:29:14.149Z"
+    },
+    {
+      "id": "1783105586961",
+      "type": "spend-on",
+      "amount": 21.74,
+      "note": "Target",
+      "date": "2026-07-03T19:06:26.961Z"
+    },
+    {
+      "id": "1783230248250",
+      "type": "load",
+      "amount": 60,
+      "note": "",
+      "date": "2026-07-05T05:44:08.250Z"
+    },
+    {
+      "id": "1783320299142",
+      "type": "spend-on",
+      "amount": 0.63,
+      "note": "7 11",
+      "date": "2026-07-06T06:44:59.142Z"
+    },
+    {
+      "id": "1783360738295",
+      "type": "spend-off",
+      "amount": 20,
+      "note": "Fan at target",
+      "date": "2026-07-06T17:58:58.296Z"
+    },
+    {
+      "id": "1783360763450",
+      "type": "spend-on",
+      "amount": 7.45,
+      "note": "Target",
+      "date": "2026-07-06T17:59:23.450Z"
+    },
+    {
+      "id": "1783473339562",
+      "type": "spend-on",
+      "amount": 38.88,
+      "note": "Hershey park",
+      "date": "2026-07-08T01:15:39.562Z"
+    },
+    {
+      "id": "1783551488876",
+      "type": "spend-on",
+      "amount": 12.49,
+      "note": "Baseball game",
+      "date": "2026-07-08T22:58:08.876Z"
+    },
+    {
+      "id": "1783611533992",
+      "type": "load",
+      "amount": 22,
+      "note": "",
+      "date": "2026-07-09T15:38:53.992Z"
+    },
+    {
+      "id": "1783889709101",
+      "type": "spend-off",
+      "amount": 25,
+      "note": "Laundry",
+      "date": "2026-07-12T20:55:09.101Z"
+    },
+    {
+      "id": "1783889741869",
+      "type": "spend-on",
+      "amount": 4.98,
+      "note": "Canteen",
+      "date": "2026-07-12T20:55:41.869Z"
+    },
+    {
+      "id": "1783889761221",
+      "type": "load",
+      "amount": 45,
+      "note": "",
+      "date": "2026-07-12T20:56:01.221Z"
+    },
+    {
+      "id": "1784240856476",
+      "type": "load",
+      "amount": 50,
+      "note": "",
+      "date": "2026-07-16T22:27:36.476Z"
+    },
+    {
+      "id": "1784240927634",
+      "type": "spend-on",
+      "amount": 26.07,
+      "note": "target",
+      "date": "2026-07-16T22:28:47.634Z"
+    },
+    {
+      "id": "1784240947847",
+      "type": "spend-on",
+      "amount": 5.3,
+      "note": "kona ice",
+      "date": "2026-07-16T22:29:07.847Z"
+    },
+    {
+      "id": "1784240999971",
+      "type": "spend-on",
+      "amount": 4.56,
+      "note": "thao nguyen",
+      "date": "2026-07-16T22:29:59.971Z"
+    },
+    {
+      "id": "1784643255805",
+      "type": "spend-on",
+      "amount": 46.7,
+      "note": "target",
+      "date": "2026-07-21T14:14:15.805Z"
+    },
+    {
+      "id": "1784643296193",
+      "type": "spend-on",
+      "amount": 3.35,
+      "note": "paintball",
+      "date": "2026-07-21T14:14:56.193Z"
+    },
+    {
+      "id": "1784643323004",
+      "type": "spend-on",
+      "amount": 1.29,
+      "note": "paintball",
+      "date": "2026-07-21T14:15:23.004Z"
+    },
+    {
+      "id": "1784643338536",
+      "type": "spend-on",
+      "amount": 2.06,
+      "note": "paintball",
+      "date": "2026-07-21T14:15:38.536Z"
+    },
+    {
+      "id": "1784643366625",
+      "type": "spend-on",
+      "amount": 10.9,
+      "note": "royal farms",
+      "date": "2026-07-21T14:16:06.625Z"
+    },
+    {
+      "id": "1784643385354",
+      "type": "spend-on",
+      "amount": 2.79,
+      "note": "royal farms",
+      "date": "2026-07-21T14:16:25.354Z"
+    },
+    {
+      "id": "1784643396845",
+      "type": "load",
+      "amount": 50,
+      "note": "",
+      "date": "2026-07-21T14:16:36.845Z"
+    }
+  ]
 }
+  
