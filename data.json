@@ -323,6 +323,13 @@
       "amount": 7.4,
       "note": "laser dome",
       "date": "2026-07-23T20:01:07.015Z"
+    },
+    {
+      "id": "1784836896714",
+      "type": "spend-on",
+      "amount": 4,
+      "note": "retail markets",
+      "date": "2026-07-23T20:01:36.714Z"
     }
   ]
 }
