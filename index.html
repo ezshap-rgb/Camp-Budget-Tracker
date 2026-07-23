@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<title>Camp Card Tracker</title>
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Camp+Card+Tracker%22%2C%22short_name%22%3A%22Camp+Card%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%232F4A3C%22%2C%22theme_color%22%3A%22%232F4A3C%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3B base64%2CPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxOTIgMTkyJz48cmVjdCB3aWR0aD0nMTkyJyBoZWlnaHQ9JzE5Micgcng9JzQwJyBmaWxsPScjMkY0QTNDJy8%2BPHJlY3QgeD0nMjQnIHk9JzU2JyB3aWR0aD0nMTQ4JyBoZWlnaHQ9JzkwJyByeD0nMTQnIGZpbGw9J25vbmUnIHN0cm9rZT0nI0Y2RjJFOCcgc3Ryb2tlLXdpZHRoPSc4Jy8%2BPHJlY3QgeD0nMjQnIHk9JzgwJyB3aWR0aD0nMTQ4JyBoZWlnaHQ9JzIyJyBmaWxsPScjRjZGMkU4Jy8%2BPGNpcmNsZSBjeD0nMTQ4JyBjeT0nMTI2JyByPScxNicgZmlsbD0nI0I1NTYyRicvPjxjaXJjbGUgY3g9JzEyNicgY3k9JzEyNicgcj0nMTYnIGZpbGw9JyNFOEE4N0MnLz48L3N2Zz4%3D%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Camp Card">
+<meta name="theme-color" content="#2F4A3C">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+    background: #F6F2E8;
+    color: #2B2A24;
+    padding-bottom: 100px;
+  }
+  .ct-display { font-family: Georgia, 'Times New Roman', serif; }
+  button { font-family: inherit; cursor: pointer; }
+  input, textarea { font-family: inherit; }
+  ::placeholder { color: #B4AC98; }
+
+  .header {
+    background: #2F4A3C;
+    color: #F6F2E8;
+    padding: 28px 20px 24px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sync-status {
+    font-size: 11px;
+    background: rgba(255,255,255,0.15);
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  .balance {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+  .balance span {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.75;
+    margin-left: 8px;
+  }
+  .header-row { display: flex; gap: 10px; }
+  .header-card {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .header-card .label { font-size: 11px; opacity: 0.7; margin-bottom: 4px; }
+  .header-card .value { font-size: 19px; font-weight: 700; }
+
+  .budget-btn {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: #F6F2E8;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .budget-btn .label { font-size: 11px; opacity: 0.7; margin-bottom: 4px; }
+  .budget-btn .value { font-size: 19px; font-weight: 700; }
+  .budget-btn .budget-note-display {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 4px;
+    font-style: italic;
+    word-break: break-word;
+  }
+
+  .stats-row { display: flex; gap: 10px; padding: 16px 16px 4px; }
+  .stat-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 10px;
+    border: 1px solid #ECE6D6;
+  }
+  .stat-card .icon { margin-bottom: 6px; font-size: 16px; }
+  .stat-card .label { font-size: 10px; color: #9B937C; margin-bottom: 2px; }
+  .stat-card .value { font-size: 14px; font-weight: 700; }
+
+  .banner {
+    margin: 12px 16px 0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+  .banner.error { background: #F4D9C6; color: #7A3B1B; }
+  .banner.info { background: #DCEADF; color: #235339; }
+
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8A8268;
+    margin: 20px 16px 10px;
+  }
+  .empty-state {
+    text-align: center;
+    color: #9B937C;
+    padding: 32px 16px;
+    font-size: 14px;
+  }
+  .tx-list { display: flex; flex-direction: column; gap: 8px; padding: 0 16px; }
+  .tx-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #ECE6D6;
+  }
+  .tx-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .tx-info { flex: 1; min-width: 0; }
+  .tx-title { font-size: 13px; font-weight: 600; }
+  .tx-note {
+    font-size: 12px; color: #9B937C;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tx-date { font-size: 11px; color: #BBB39C; margin-top: 2px; }
+  .tx-amount { font-weight: 700; font-size: 15px; }
+  .tx-delete { background: none; border: none; color: #C9C2AB; padding: 4px; font-size: 16px; }
+
+  .fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #B5562F;
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(181,86,47,0.4);
+    font-size: 26px;
+  }
+
+  .backup-bar {
+    display: flex;
+    gap: 8px;
+    padding: 16px;
+  }
+  .backup-bar button {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #E4DDC8;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 12px;
+    color: #5C5444;
+    font-weight: 600;
+  }
+
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(43,42,36,0.45);
+    display: none;
+    align-items: flex-end;
+    z-index: 50;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #FFFDF8;
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px 20px 28px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px;
+  }
+  .modal-title { font-size: 18px; font-weight: 700; }
+  .modal-close { background: none; border: none; color: #9B937C; font-size: 20px; }
+  label.field-label {
+    display: block; font-size: 12px; color: #8A8268;
+    margin-bottom: 6px; margin-top: 12px;
+  }
+  .field-input {
+    width: 100%; padding: 12px 14px; border-radius: 10px;
+    border: 1px solid #E4DDC8; font-size: 15px; background: #fff; outline: none;
+  }
+  textarea.field-input {
+    resize: vertical; min-height: 60px;
+  }
+  .primary-btn {
+    width: 100%; margin-top: 20px; padding: 13px; border-radius: 10px;
+    border: none; background: #2F4A3C; color: #fff; font-size: 15px; font-weight: 600;
+  }
+  .type-row { display: flex; gap: 8px; margin-bottom: 16px; }
+  .type-opt {
+    flex: 1; padding: 10px 6px; border-radius: 10px;
+    border: 1px solid #E4DDC8; background: #fff;
+    font-size: 12px; font-weight: 600; color: #7A7460;
+  }
+  .type-opt.active { background: #FBF6EA; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">
+    <span>Camp Card</span>
+    <span class="sync-status" id="syncStatus">Local Mode</span>
+  </div>
+  <div class="balance ct-display" id="cardBalance">$0.00<span>on the card now</span></div>
+  <div class="header-row">
+    <div class="header-card">
+      <div class="label">Budget left</div>
+      <div class="value ct-display" id="budgetRemaining">$0.00</div>
+    </div>
+    <button class="budget-btn" id="openBudgetModal">
+      <div class="label">⚙ Total budget</div>
+      <div class="value ct-display" id="budgetTotalLabel">$0.00</div>
+      <div class="budget-note-display" id="budgetNoteDisplay"></div>
+    </button>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="icon" style="color:#2F6E4F">↑</div>
+    <div class="label">Loaded total</div>
+    <div class="value ct-display" id="totalLoaded">$0.00</div>
+  </div>
+  <div class="stat-card">
+    <div class="icon" style="color:#B5562F">↓</div>
+    <div class="label">Spent on budget</div>
+    <div class="value ct-display" id="totalOnBudget">$0.00</div>
+  </div>
+  <div class="stat-card">
+    <div class="icon" style="color:#7A6A4F">⊙</div>
+    <div class="label">Spent off budget</div>
+    <div class="value ct-display" id="totalOffBudget">$0.00</div>
+  </div>
+</div>
+
+<div id="bannerArea"></div>
+
+<div class="backup-bar">
+  <button id="openGithubModal">⚙ GitHub Settings</button>
+  <button id="manualSyncBtn">🔄 Sync Now</button>
+</div>
+
+<div class="section-label">Activity</div>
+<div id="txArea"></div>
+
+<button class="fab" id="openAddModal">+</button>
+
+<div class="modal-overlay" id="budgetModalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title ct-display">Set summer budget</div>
+      <button class="modal-close" id="closeBudgetModal">✕</button>
+    </div>
+    <label class="field-label">Total spending budget for the summer</label>
+    <input class="field-input" type="number" inputmode="decimal" id="budgetInput" placeholder="0.00" />
+    <label class="field-label">Budget Comments / Notes</label>
+    <textarea class="field-input" id="budgetNoteInput" placeholder="e.g. Includes $50 extra for canteen trips and crafts"></textarea>
+    <button class="primary-btn" id="saveBudgetBtn">Save budget</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="githubModalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title ct-display">GitHub Sync Setup</div>
+      <button class="modal-close" id="closeGithubModal">✕</button>
+    </div>
+    <label class="field-label">GitHub Username / Owner</label>
+    <input class="field-input" type="text" id="ghOwner" placeholder="e.g. octocat" />
+    <label class="field-label">Repository Name</label>
+    <input class="field-input" type="text" id="ghRepo" placeholder="e.g. camp-card-tracker" />
+    <label class="field-label">Data File Path</label>
+    <input class="field-input" type="text" id="ghPath" placeholder="data.json" />
+    <label class="field-label">Personal Access Token (PAT)</label>
+    <input class="field-input" type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" />
+    <button class="primary-btn" id="saveGithubBtn">Save Configuration & Sync</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addModalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title ct-display">Log a transaction</div>
+      <button class="modal-close" id="closeAddModal">✕</button>
+    </div>
+    <div class="type-row" id="typeRow">
+      <button class="type-opt active" data-type="load">Loaded</button>
+      <button class="type-opt" data-type="spend-on">Spent (budget)</button>
+      <button class="type-opt" data-type="spend-off">Spent (off budget)</button>
+    </div>
+    <label class="field-label">Amount</label>
+    <input class="field-input" type="number" inputmode="decimal" id="amountInput" placeholder="0.00" />
+    <label class="field-label">Note (optional)</label>
+    <input class="field-input" type="text" id="noteInput" placeholder="e.g. canteen snacks, camp store hoodie" />
+    <button class="primary-btn" id="saveTxBtn">Add transaction</button>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = "camp-card-tracker-data-v1";
+const GH_CONFIG_KEY = "camp-card-github-config";
+const typeLabel = { load: "Loaded to card", "spend-on": "Spent — budget", "spend-off": "Spent — off budget" };
+const typeColor = { load: "#2F6E4F", "spend-on": "#B5562F", "spend-off": "#7A6A4F" };
+
+let state = { budget: 0, budgetNote: "", transactions: [] };
+let ghConfig = { owner: "", repo: "", path: "data.json", token: "" };
+let fileSha = null;
+let selectedType = "load";
+
+function fmt(n) {
+  return Number(n).toLocaleString("en-US", { style: "currency", currency: "USD" });
+}
+
+function updateSyncStatus(text) {
+  document.getElementById("syncStatus").textContent = text;
+}
+
+function loadLocal() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) state = JSON.parse(raw);
+    const rawGh = localStorage.getItem(GH_CONFIG_KEY);
+    if (rawGh) ghConfig = JSON.parse(rawGh);
+  } catch (e) {
+    showBanner("error", "Couldn't read saved data — starting fresh.");
+  }
+}
+
+function saveLocal() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    showBanner("error", "Couldn't save locally.");
+  }
+}
+
+function showBanner(type, msg) {
+  const area = document.getElementById("bannerArea");
+  area.innerHTML = `<div class="banner ${type}">${msg}</div>`;
+  setTimeout(() => { if (area.innerHTML.includes(msg)) area.innerHTML = ""; }, 4000);
+}
+
+// GitHub Syncing Engine
+async function syncFromGithub() {
+  if (!ghConfig.owner || !ghConfig.repo || !ghConfig.token) {
+    updateSyncStatus("Local Mode");
+    return;
+  }
+  updateSyncStatus("Syncing...");
+  const url = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path || 'data.json'}`;
+  try {
+    const res = await fetch(url, {
+      headers: {
+        "Authorization": `token ${ghConfig.token}`,
+        "Accept": "application/vnd.github.v3+json"
+      }
+    });
+    if (res.ok) {
+      const json = await res.json();
+      fileSha = json.sha;
+      const contentStr = decodeURIComponent(escape(atob(json.content)));
+      state = JSON.parse(contentStr);
+      saveLocal();
+      render();
+      updateSyncStatus("Synced");
+    } else if (res.status === 404) {
+      updateSyncStatus("New File (Not Created Yet)");
+    } else {
+      updateSyncStatus("Sync Error");
+      showBanner("error", "Failed to fetch data from GitHub.");
+    }
+  } catch (e) {
+    updateSyncStatus("Offline / Error");
+    showBanner("error", "Network error while reaching GitHub.");
+  }
+}
+
+async function saveToGithub() {
+  saveLocal();
+  render();
+  if (!ghConfig.owner || !ghConfig.repo || !ghConfig.token) return;
+
+  updateSyncStatus("Saving to GitHub...");
+  const url = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path || 'data.json'}`;
+  
+  const contentStr = JSON.stringify(state, null, 2);
+  const base64Content = btoa(unescape(encodeURIComponent(contentStr)));
+
+  const bodyData = {
+    message: "Update camp card data [auto-sync]",
+    content: base64Content,
+    sha: fileSha || undefined
+  };
+
+  try {
+    const res = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${ghConfig.token}`,
+        "Content-Type": "application/json",
+        "Accept": "application/vnd.github.v3+json"
+      },
+      body: JSON.stringify(bodyData)
+    });
+
+    if (res.ok) {
+      const json = await res.json();
+      fileSha = json.content.sha;
+      updateSyncStatus("Synced");
+    } else {
+      updateSyncStatus("Save Error");
+      showBanner("error", "Could not save to GitHub. Check token permissions.");
+    }
+  } catch (e) {
+    updateSyncStatus("Offline / Save Error");
+  }
+}
+
+function totals() {
+  let loaded = 0, onBudget = 0, offBudget = 0;
+  for (const t of state.transactions || []) {
+    if (t.type === "load") loaded += t.amount;
+    if (t.type === "spend-on") onBudget += t.amount;
+    if (t.type === "spend-off") offBudget += t.amount;
+  }
+  return { loaded, onBudget, offBudget };
+}
+
+function render() {
+  const t = totals();
+  const budgetRemaining = (state.budget || 0) - t.onBudget;
+  const cardBalance = t.loaded - t.onBudget - t.offBudget;
+
+  document.getElementById("cardBalance").innerHTML = fmt(cardBalance) + "<span>on the card now</span>";
+  document.getElementById("budgetRemaining").textContent = fmt(budgetRemaining);
+  document.getElementById("budgetRemaining").style.color = budgetRemaining < 0 ? "#E8A87C" : "#F6F2E8";
+  document.getElementById("budgetTotalLabel").textContent = fmt(state.budget || 0);
+  
+  const noteDisplay = document.getElementById("budgetNoteDisplay");
+  if (state.budgetNote) {
+    noteDisplay.textContent = state.budgetNote;
+    noteDisplay.style.display = "block";
+  } else {
+    noteDisplay.style.display = "none";
+  }
+
+  document.getElementById("totalLoaded").textContent = fmt(t.loaded);
+  document.getElementById("totalOnBudget").textContent = fmt(t.onBudget);
+  document.getElementById("totalOffBudget").textContent = fmt(t.offBudget);
+
+  const txArea = document.getElementById("txArea");
+  if (!state.transactions || state.transactions.length === 0) {
+    txArea.innerHTML = `<div class="empty-state">Nothing logged yet. Tap + to add a load or a spend.</div>`;
+    return;
+  }
+  const sorted = [...state.transactions].sort((a, b) => new Date(b.date) - new Date(a.date));
+  txArea.innerHTML = `<div class="tx-list">` + sorted.map(tx => `
+    <div class="tx-item">
+      <div class="tx-dot" style="background:${typeColor[tx.type]}"></div>
+      <div class="tx-info">
+        <div class="tx-title">${typeLabel[tx.type]}</div>
+        ${tx.note ? `<div class="tx-note">${escapeHtml(tx.note)}</div>` : ""}
+        <div class="tx-date">${new Date(tx.date).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</div>
+      </div>
+      <div class="tx-amount" style="color:${typeColor[tx.type]}">${tx.type === "load" ? "+" : "−"}${fmt(tx.amount)}</div>
+      <button class="tx-delete" data-id="${tx.id}">🗑</button>
+    </div>
+  `).join("") + `</div>`;
+
+  txArea.querySelectorAll(".tx-delete").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.transactions = state.transactions.filter(x => x.id !== btn.dataset.id);
+      saveToGithub();
+    });
+  });
+}
+
+function escapeHtml(str) {
+  const div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Budget modal
+const budgetModalOverlay = document.getElementById("budgetModalOverlay");
+document.getElementById("openBudgetModal").addEventListener("click", () => {
+  document.getElementById("budgetInput").value = state.budget || "";
+  document.getElementById("budgetNoteInput").value = state.budgetNote || "";
+  budgetModalOverlay.classList.add("open");
+});
+document.getElementById("closeBudgetModal").addEventListener("click", () => budgetModalOverlay.classList.remove("open"));
+budgetModalOverlay.addEventListener("click", (e) => { if (e.target === budgetModalOverlay) budgetModalOverlay.classList.remove("open"); });
+document.getElementById("saveBudgetBtn").addEventListener("click", () => {
+  const val = parseFloat(document.getElementById("budgetInput").value);
+  if (isNaN(val) || val < 0) { showBanner("error", "Enter a valid budget amount."); return; }
+  state.budget = val;
+  state.budgetNote = document.getElementById("budgetNoteInput").value.trim();
+  saveToGithub();
+  budgetModalOverlay.classList.remove("open");
+  showBanner("info", "Budget saved.");
+});
+
+// GitHub Config modal
+const githubModalOverlay = document.getElementById("githubModalOverlay");
+document.getElementById("openGithubModal").addEventListener("click", () => {
+  document.getElementById("ghOwner").value = ghConfig.owner || "";
+  document.getElementById("ghRepo").value = ghConfig.repo || "";
+  document.getElementById("ghPath").value = ghConfig.path || "data.json";
+  document.getElementById("ghToken").value = ghConfig.token || "";
+  githubModalOverlay.classList.add("open");
+});
+document.getElementById("closeGithubModal").addEventListener("click", () => githubModalOverlay.classList.remove("open"));
+githubModalOverlay.addEventListener("click", (e) => { if (e.target === githubModalOverlay) githubModalOverlay.classList.remove("open"); });
+document.getElementById("saveGithubBtn").addEventListener("click", () => {
+  ghConfig = {
+    owner: document.getElementById("ghOwner").value.trim(),
+    repo: document.getElementById("ghRepo").value.trim(),
+    path: document.getElementById("ghPath").value.trim() || "data.json",
+    token: document.getElementById("ghToken").value.trim()
+  };
+  localStorage.setItem(GH_CONFIG_KEY, JSON.stringify(ghConfig));
+  githubModalOverlay.classList.remove("open");
+  syncFromGithub();
+});
+
+// Add transaction modal
+const addModalOverlay = document.getElementById("addModalOverlay");
+document.getElementById("openAddModal").addEventListener("click", () => {
+  document.getElementById("amountInput").value = "";
+  document.getElementById("noteInput").value = "";
+  selectedType = "load";
+  document.querySelectorAll(".type-opt").forEach(b => b.classList.toggle("active", b.dataset.type === "load"));
+  addModalOverlay.classList.add("open");
+});
+document.getElementById("closeAddModal").addEventListener("click", () => addModalOverlay.classList.remove("open"));
+addModalOverlay.addEventListener("click", (e) => { if (e.target === addModalOverlay) addModalOverlay.classList.remove("open"); });
+document.querySelectorAll(".type-opt").forEach(btn => {
+  btn.addEventListener("click", () => {
+    selectedType = btn.dataset.type;
+    document.querySelectorAll(".type-opt").forEach(b => b.classList.toggle("active", b === btn));
+  });
+});
+document.getElementById("saveTxBtn").addEventListener("click", () => {
+  const val = parseFloat(document.getElementById("amountInput").value);
+  if (isNaN(val) || val <= 0) { showBanner("error", "Enter an amount greater than 0."); return; }
+  const note = document.getElementById("noteInput").value.trim();
+  if (!state.transactions) state.transactions = [];
+  state.transactions.push({
+    id: Date.now().toString(),
+    type: selectedType,
+    amount: val,
+    note,
+    date: new Date().toISOString(),
+  });
+  saveToGithub();
+  addModalOverlay.classList.remove("open");
+});
+
+document.getElementById("manualSyncBtn").addEventListener("click", () => {
+  syncFromGithub();
+});
+
+// Initial app launch sequence
+loadLocal();
+render();
+syncFromGithub();
+</script>
+</body>
+</html>
