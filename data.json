@@ -393,6 +393,13 @@
       "amount": 8.53,
       "note": "Aisle one",
       "date": "2026-07-30T11:44:00.178Z"
+    },
+    {
+      "id": "1785411860247",
+      "type": "spend-on",
+      "amount": 4.76,
+      "note": "Royal farms",
+      "date": "2026-07-30T11:44:20.247Z"
     }
   ]
 }
