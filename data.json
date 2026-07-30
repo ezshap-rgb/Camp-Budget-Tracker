@@ -414,6 +414,13 @@
       "amount": 6.49,
       "note": "Aisle one",
       "date": "2026-07-30T16:31:54.065Z"
+    },
+    {
+      "id": "1785429129443",
+      "type": "spend-on",
+      "amount": 8.49,
+      "note": "Airport",
+      "date": "2026-07-30T16:32:09.443Z"
     }
   ]
 }
